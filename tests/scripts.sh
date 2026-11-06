@@ -32,6 +32,7 @@ check "missing session id is its own case" "env -u CLAUDE_CODE_SESSION_ID '$prep
 check "unknown session is not found" "CLAUDE_CODE_SESSION_ID=nope '$prep' | grep -q 'TRANSCRIPT: NOT_FOUND'"
 touch "$tmp/cfg/projects/x/abc.jsonl"
 check "finds the transcript" "CLAUDE_CONFIG_DIR='$tmp/cfg' CLAUDE_CODE_SESSION_ID=abc '$prep' | grep -q 'x/abc.jsonl'"
+check "chair script prints the chair" "'$repo/skills/timeout/scripts/chair.sh' | grep -q 'T I M E O U T'"
 check "prints the chair" "'$prep' | grep -q 'T I M E O U T'"
 rm -rf "$tmp"
 exit "$fail"

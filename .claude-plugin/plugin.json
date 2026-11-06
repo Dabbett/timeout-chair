@@ -1,6 +1,6 @@
 {
   "name": "timeout-chair",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Send your AI coding agent to the timeout chair: an evidence-based root-cause report with enforceable fixes instead of an apology.",
   "author": { "name": "Dabbett" },
   "repository": "https://github.com/Dabbett/timeout-chair",

@@ -88,6 +88,7 @@ Then it asks which fixes you want. Nothing is applied without your yes.
 ## Limits
 
 - The chair appears with the report, not the moment you say the words, because models skipped a chair-first step in testing.
+- Logging is a step the model carries out, and about 1 run in 12 skipped it in testing, so the history can miss an incident.
 - Why an agent acted can't be proven from a log, and the investigator is the same kind of model as the agent. Independence helps, but it's no guarantee.
 - Proposed fixes aren't tested, and hooks can have false positives. Test a hook before relying on it.
 - The session log format is internal to Claude Code and can change in any release.

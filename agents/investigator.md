@@ -83,7 +83,7 @@ Know the limits and state them: Bash deny patterns are not a security boundary. 
 - A fix that would not have stopped this incident is not a fix.
 - Your fix tests have **not been run**. Say so. You cannot run anything.
 - Scope matters: prefer `.claude/settings.local.json` or `~/.claude/settings.json`. Never touch managed settings.
-- If past timeouts show the same class after an earlier fix, that fix did not hold. Say so and move up a level where possible.
+- Past timeouts: only a row with status `applied` means a fix was in place. If the same class recurs after one, that fix did not hold, so say so and move up a level where possible. `proposed` or `declined` with no `applied` row for that class means no fix was applied, so say that instead.
 - Do not keep adding CLAUDE.md lines: a new line must replace one, and the file should stay under 200 lines.
 
 **Rejected outright:** "be more careful", "try to remember", "pay closer attention", "double-check", "won't happen again", "going forward", apologies, and memory notes with no trigger. These must not appear as fixes or in the causal chain.

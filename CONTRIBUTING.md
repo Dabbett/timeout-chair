@@ -9,7 +9,7 @@ claude plugin validate .
 ```
 
 ```bash
-shellcheck tests/*.sh skills/*/scripts/*.sh
+shellcheck tests/*.sh scripts/*.sh skills/*/scripts/*.sh
 ```
 
 If you change the skills or the investigator, also run these. Both make real model calls on your account:

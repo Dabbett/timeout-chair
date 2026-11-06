@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Appends one verdict to the local timeout log. Usage:
 #   log.sh <verdict> <class> <level 0-7> <target> <status>
-# Fields are validated so transcript text can never reach the log. No quotes
-# from the session are stored.
+# Every field is limited to a fixed list, so session text cannot reach the log.
+# Any target other than a known config file is stored as "other".
 set -eu
 [ "$#" -eq 5 ] || { echo "usage: log.sh verdict class level target status" >&2; exit 2; }
 verdict="$1"; class="$2"; level="$3"; target="$4"; status="$5"
@@ -16,10 +16,12 @@ case "$class" in
 esac
 case "$level" in [0-7]) ;; *) echo "bad level" >&2; exit 2;; esac
 case "$status" in proposed|applied|declined|none) ;; *) echo "bad status" >&2; exit 2;; esac
-target="$(printf '%s' "$target" | tr -cd 'A-Za-z0-9._/~-' | cut -c1-120)"
+case "${target##*/}" in
+  CLAUDE.md|settings.json|settings.local.json|none) target="${target##*/}" ;;
+  *) target="other" ;;
+esac
 
-hash_cmd() { if command -v shasum >/dev/null 2>&1; then shasum; else sha1sum; fi; }
-project="$(pwd | hash_cmd | cut -c1-12)"
+project="$("$(dirname "${BASH_SOURCE[0]}")/../../../scripts/project-hash.sh")"
 state="${XDG_STATE_HOME:-$HOME/.local/state}/timeout-chair"
 mkdir -p "$state"
 chmod 700 "$state"

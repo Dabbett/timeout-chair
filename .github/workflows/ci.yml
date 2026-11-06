@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: shellcheck tests/*.sh skills/*/scripts/*.sh
-      - run: npm install --global @anthropic-ai/claude-code
+      - run: shellcheck tests/*.sh scripts/*.sh skills/*/scripts/*.sh
+      - run: tests/scripts.sh
+      - run: npm install --global @anthropic-ai/claude-code@2.1.319
       - run: claude plugin validate .

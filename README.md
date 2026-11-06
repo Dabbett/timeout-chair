@@ -1,3 +1,5 @@
+<p align="center"><img src="assets/Icon.png" alt="An orange spark sulking in a wooden chair, facing the corner" width="220"></p>
+
 # Timeout Chair
 
 Your AI coding agent went off the rails. Instead of "I'll try not to do that next time", send it to timeout and get a report on what actually happened and what to change so it can't happen the same way again.
@@ -42,7 +44,7 @@ go to timeout, you said the tests passed and CI is red
 /timeout you deleted a file I told you to keep
 ```
 
-`/timeout` always works. The plain phrase relies on the model recognising it, so use `/timeout` if it ever doesn't fire. A run cost about $0.25 to $0.75 at list prices on our small test sessions. Long sessions will cost more.
+`/timeout` is the direct route. The plain phrase relies on the model recognising it, so use `/timeout` if it doesn't fire, or `/timeout-chair:timeout` if another command has that name. A run cost about $0.25 to $0.75 at list prices on our small test sessions. Long sessions will cost more.
 
 ## What you get
 
@@ -66,7 +68,7 @@ Absent control: nothing checks a pass claim against the last edit
 USER/SETUP SIDE: The rule sat at line 212 of a 340-line CLAUDE.md.
 RECURRENCE: 1 prior; a CLAUDE.md line was added and did not hold. Moved up a level.
 FIXES (tests not run)
-1. [Level 4 | project | fails open | bypass: reworded claims] .claude/settings.json
+1. [Level 4 | local | fails open | bypass: reworded claims] .claude/settings.local.json
    <exact Stop hook entry and script>
    Would fire at: [L461]  Test: edit after last test run / test run after last edit
 REJECTED: Another CLAUDE.md line. It already failed once.
@@ -81,7 +83,7 @@ Then it asks which fixes you want. Nothing is applied without your yes.
 - **It can clear the AI.** Verdicts are `MODEL`, `SETUP`, `PROMPT`, `MIXED`, `NO_ERROR`, and `UNDETERMINED`. Your complaint is tested, not assumed.
 - **Fixes must be enforceable.** They rank from removing a tool, through hooks and deny rules, down to `CLAUDE.md`, which is marked `UNENFORCED`. Each needs the exact change and the log line where it would have fired. "Be more careful" is rejected.
 - **At most three fixes.** "No change" is a valid result, which keeps your config from growing a rule per incident.
-- **It remembers.** A repeat of the same failure means the earlier fix didn't hold, so the next one has to be stronger.
+- **It remembers.** If a failure returns after a fix you applied, that fix didn't hold, so the next one has to be stronger.
 
 ## Limits
 
@@ -95,7 +97,7 @@ Then it asks which fixes you want. Nothing is applied without your yes.
 
 Session logs are plain text and can contain secrets. Timeout Chair reads the current session's log and your Claude Code config, and that content goes to your model provider, as with anything else in Claude Code. Secrets in reports are redacted on a best-effort basis, so check a report before sharing it.
 
-A history of verdicts stays in `~/.local/state/timeout-chair/log.jsonl`. It holds the date, a project hash, the verdict, the failure class, and the fix's file, with no quotes from your session. Delete it whenever you like.
+A history of verdicts stays in `~/.local/state/timeout-chair/log.jsonl`. It holds the date, a project hash, the verdict, the failure class, and the type of file fixed, with no quotes from your session. Delete it whenever you like.
 
 ## Similar projects
 

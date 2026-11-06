@@ -7,8 +7,7 @@ config="${CLAUDE_CONFIG_DIR:-$HOME/.claude}"
 state="${XDG_STATE_HOME:-$HOME/.local/state}/timeout-chair"
 session="${CLAUDE_CODE_SESSION_ID:-}"
 
-hash_cmd() { if command -v shasum >/dev/null 2>&1; then shasum; else sha1sum; fi; }
-project="$(pwd | hash_cmd | cut -c1-12)"
+project="$("$dir/../../scripts/project-hash.sh")"
 
 echo "CHAIR:"
 cat "$dir/art/chair.txt"
@@ -26,6 +25,8 @@ if [ -n "$transcript" ]; then
   echo "TRANSCRIPT: $transcript"
   sidecar="${transcript%.jsonl}"
   [ -d "$sidecar" ] && echo "SIDECAR_DIR: $sidecar"
+elif [ -z "$session" ]; then
+  echo "TRANSCRIPT: SESSION_ID_MISSING"
 else
   echo "TRANSCRIPT: NOT_FOUND"
 fi

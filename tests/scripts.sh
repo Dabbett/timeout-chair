@@ -21,6 +21,9 @@ check "drops unknown target" "! grep -q secret '$XDG_STATE_HOME/timeout-chair/lo
 rows="$(wc -l < "$XDG_STATE_HOME/timeout-chair/log.jsonl")"
 check "rejects shell text in a field" "! '$log' MODEL \"x'; touch pwned; '\" 0 none none 2>/dev/null"
 check "rejected call writes nothing" "[ \"\$(wc -l < '$XDG_STATE_HOME/timeout-chair/log.jsonl')\" -eq $rows ] && [ ! -e pwned ]"
+# shellcheck disable=SC2016
+"$log" MODEL scope-creep 3 '$(touch pwned)' proposed >/dev/null
+check "shell text in target stored as other" "tail -n 1 '$XDG_STATE_HOME/timeout-chair/log.jsonl' | grep -q '\"target\":\"other\"' && [ ! -e pwned ]"
 cd sub || exit 1
 check "history found from a subfolder" "'$prep' | grep -q scope-creep"
 cd "$tmp/other" || exit 1

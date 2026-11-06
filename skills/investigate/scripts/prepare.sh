@@ -34,7 +34,7 @@ echo "WORKING_DIR: $(pwd)"
 
 echo "PAST_TIMEOUTS:"
 if [ -f "$state/log.jsonl" ]; then
-  grep -F "\"project\":\"$project\"" "$state/log.jsonl" | tail -n 20
+  grep -F "\"project\":\"$project\"" "$state/log.jsonl" | tail -n 40
 fi
 echo "END_PAST_TIMEOUTS"
 exit 0

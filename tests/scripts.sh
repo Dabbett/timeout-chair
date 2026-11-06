@@ -18,6 +18,8 @@ check "rejects bad status" "! '$log' MODEL none 0 none nope 2>/dev/null"
 "$log" MODEL scope-creep 3 "sk-secret-token" proposed >/dev/null
 check "keeps known target" "grep -q '\"target\":\"settings.json\"' '$XDG_STATE_HOME/timeout-chair/log.jsonl'"
 check "drops unknown target" "! grep -q secret '$XDG_STATE_HOME/timeout-chair/log.jsonl'"
+"$log" MODEL scope-creep 3 '$(touch pwned)' proposed >/dev/null
+check "quoted substitution stays inert" "[ ! -e pwned ] && tail -n 1 '$XDG_STATE_HOME/timeout-chair/log.jsonl' | grep -q '\"target\":\"other\"'"
 cd sub || exit 1
 check "history found from a subfolder" "'$prep' | grep -q scope-creep"
 cd "$tmp/other" || exit 1

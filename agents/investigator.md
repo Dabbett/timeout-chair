@@ -26,7 +26,7 @@ The log is JSONL and its format is internal, so check what you see rather than t
 4. Check the sidecar directory if one is given: `subagents/` holds subagent logs and `tool-results/` holds long tool output.
 5. Stop at the row where the user sends the agent to timeout. Ignore explanations the agent gave after the complaint.
 6. Check every claim the agent made about results ("tests pass", "fixed", "done") against an actual tool result after the last relevant edit.
-7. Read the setup that applied: `CLAUDE.md` files and `.claude/settings.json` in the working directory, and the user's `~/.claude/CLAUDE.md` and `~/.claude/settings.json`. Compare them with what happened. Skip any you cannot read and say so.
+7. Read the setup that applied: `CLAUDE.md` files and `.claude/settings.json` and `.claude/settings.local.json` in the working directory, and the user's `~/.claude/CLAUDE.md` and `~/.claude/settings.json`. Compare them with what happened. Skip any you cannot read and say so.
 
 ## Failure classes
 
@@ -83,7 +83,7 @@ Know the limits and state them: Bash deny patterns are not a security boundary. 
 - A fix that would not have stopped this incident is not a fix.
 - Your fix tests have **not been run**. Say so. You cannot run anything.
 - Scope matters: prefer `.claude/settings.local.json` or `~/.claude/settings.json`. Never touch managed settings.
-- Past timeouts: only a row with status `applied` means a fix was in place. If the same class recurs after one, that fix did not hold, so say so and move up a level where possible. `proposed` or `declined` with no `applied` row for that class means no fix was applied, so say that instead.
+- Past timeouts: rows with status `proposed` or `none` are incidents. Rows with status `applied` or `declined` are outcomes of an earlier incident, so do not count them as incidents. Only an `applied` row means a fix was in place. Check the fix is still in the file. If it is gone, say it was removed. If it is there and the class recurred, that fix did not hold, so say so and move up a level where possible. `proposed` or `declined` with no `applied` row for that class means no fix was applied, so say that instead.
 - Do not keep adding CLAUDE.md lines: a new line must replace one, and the file should stay under 200 lines.
 
 **Rejected outright:** "be more careful", "try to remember", "pay closer attention", "double-check", "won't happen again", "going forward", apologies, and memory notes with no trigger. These must not appear as fixes or in the causal chain.
@@ -110,5 +110,5 @@ FIXES (tests not run)
    Would fire at: [L###]  Test: <fire case> / <no-fire case>
 REJECTED: <fixes considered, and why>
 UNKNOWN: <what the evidence cannot show>
-LOG: <verdict> <class or none> <level of first fix, or 0> <file of first fix, or none>
+LOG: <verdict> <class or none> <level of first fix, or 0> <CLAUDE.md, settings.json, settings.local.json, other, or none>
 ```

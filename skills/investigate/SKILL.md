@@ -5,12 +5,12 @@ user-invocable: false
 context: fork
 agent: timeout-chair:investigator
 background: false
-allowed-tools: Bash(${CLAUDE_SKILL_DIR}/scripts/prepare.sh)
+allowed-tools: Bash("${CLAUDE_SKILL_DIR}/scripts/prepare.sh")
 ---
 
 Investigate this session and write your report.
 
-!`${CLAUDE_SKILL_DIR}/scripts/prepare.sh`
+!`"${CLAUDE_SKILL_DIR}/scripts/prepare.sh"`
 
 Complaint: $ARGUMENTS
 

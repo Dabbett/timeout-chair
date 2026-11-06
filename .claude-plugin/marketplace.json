@@ -1,0 +1,11 @@
+{
+  "name": "timeout-chair",
+  "owner": { "name": "Dabbett" },
+  "plugins": [
+    {
+      "name": "timeout-chair",
+      "source": "./",
+      "description": "Send your AI coding agent to the timeout chair: an evidence-based root-cause report with enforceable fixes instead of an apology."
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+.DS_Store
+.claude/
+*.log
+!tests/fixtures/old.log
+evals/results/

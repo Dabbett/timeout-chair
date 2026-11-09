@@ -21,7 +21,7 @@ Your AI coding agent went off the rails. Instead of "I'll try not to do that nex
                T I M E O U T
 ```
 
-For Claude Code. It runs inside your own session and uses your plan's normal usage, with no charge of its own. No server, telemetry, or network calls of its own.
+For Claude Code. No server, telemetry, or network calls of its own. See [Cost](#cost).
 
 ## Install
 
@@ -44,15 +44,15 @@ go to timeout, you said the tests passed and CI is red
 /timeout you deleted a file I told you to keep
 ```
 
-`/timeout` is the direct route. The plain phrase relies on the model recognising it, so use `/timeout` if it doesn't fire, or `/timeout-chair:timeout` if another command has that name.
+`/timeout` is the direct route. The plain phrase relies on the model recognizing it, so use `/timeout` if it doesn't fire, or `/timeout-chair:timeout` if another command has that name.
 
 ## Cost
 
-Timeout Chair costs nothing extra. A run is ordinary Claude Code usage on whichever account you're signed in with, and the plugin never changes how that account is billed.
+Timeout Chair adds no charge of its own. A run is ordinary Claude Code usage on whichever account you're signed in with, and the plugin never changes how that account is billed:
 
 - **Claude subscription** (Pro, Max, Ultra, Team, or Enterprise): a run counts toward your plan's usage limits like any other prompt, with no extra charge.
-- **Usage credits:** if usage credits are turned on and you're past your plan's limits, a run draws on them like any other Claude Code work. If they're off, you hit the usual limit instead. Run `/usage-credits` to manage them. On Team and Enterprise plans, it asks your admin.
-- **API key or cloud provider:** billed per token like the rest of your session. Our small test sessions came to about $0.25 to $0.75 at list prices.
+- **Usage credits:** if usage credits are turned on and you're past your plan's limits, a run draws on them like any other Claude Code work. If they're off, you hit the usual limit instead. Run `/usage-credits` to manage them. On Team and Enterprise plans, that command sends a request to your admin unless you have billing access.
+- **API key or cloud provider:** billed per token like the rest of your session. Runs on our small Sonnet test sessions came to $0.35 to $0.45 at list prices. Larger models cost more per token.
 
 A run uses more than a typical prompt because the investigator reads the session log, and long sessions use more. To see which account a session uses, run `/status`.
 

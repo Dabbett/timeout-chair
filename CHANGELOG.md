@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2
+
+American spelling in the docs and prompts, and a README section on cost.
+
 ## 0.1.1
 
 The main session now adds the chair if the report leaves it out.

@@ -89,7 +89,7 @@ Then it asks which fixes you want. Nothing is applied without your yes.
 
 ## How it stays honest
 
-- **Evidence, not confession.** Research on model explanations shows a model's stated reasons often don't match what drove its behaviour ([Turpin et al.](https://arxiv.org/abs/2305.04388), [Chen et al.](https://arxiv.org/abs/2505.05410)). So facts must cite a log line, and any "why" is labelled a hypothesis.
+- **Evidence, not confession.** Research on model explanations shows a model's stated reasons often don't match what drove its behavior ([Turpin et al.](https://arxiv.org/abs/2305.04388), [Chen et al.](https://arxiv.org/abs/2505.05410)). So facts must cite a log line, and any "why" is labeled a hypothesis.
 - **It can clear the AI.** Verdicts are `MODEL`, `SETUP`, `PROMPT`, `MIXED`, `NO_ERROR`, and `UNDETERMINED`. Your complaint is tested, not assumed.
 - **Fixes must be enforceable.** They rank from removing a tool, through hooks and deny rules, down to `CLAUDE.md`, which is marked `UNENFORCED`. Each needs the exact change and the log line where it would have fired. "Be more careful" is rejected.
 - **At most three fixes.** "No change" is a valid result, which keeps your config from growing a rule per incident.
